@@ -1,0 +1,41 @@
+# Включаем режим перезаписи URL
+RewriteEngine On
+
+# Перенаправление HTTP на HTTPS (если нужен HTTPS)
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Запрещаем доступ к файлу .env (если вдруг он в корне)
+<Files ".env">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Запрещаем доступ к файлам конфигурации и скрытым файлам (начинающимся с ".")
+<FilesMatch "^\.(htaccess|htpasswd|git|svn|env)">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Разрешаем только определенные методы (GET, POST)
+<LimitExcept GET POST>
+    Order allow,deny
+    Deny from all
+</LimitExcept>
+
+# Убираем "index.php" из URL (если у тебя Laravel или PHP)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
+
+# Кеширование статических файлов (оптимизация скорости)
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType text/javascript "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+</IfModule>
