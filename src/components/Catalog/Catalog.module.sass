@@ -1,0 +1,87 @@
+.miniCatalog
+  padding: 20px
+  background: #1a1a1a // Тёмный фон
+  color: #fff // Белый текст
+  width: 100%
+  margin: 0 auto
+  min-height: 500px // Чтобы не схлопывалось
+  gap: 20px
+  position: relative
+// Шапка каталога
+.titles
+  display: flex
+  justify-content: space-between
+  align-items: center
+  margin-bottom: 16px
+
+  .catalogTitle
+    font-size: 24px
+    font-weight: bold
+
+  .lookForAll
+    font-size: 24px
+    cursor: pointer
+    margin-right: 10px
+
+// Стили slick-слайдов
+.slick-slide
+  display: flex
+  justify-content: center
+  align-items: center
+
+  > div
+    margin: 0 10px // Горизонтальный отступ между карточками
+
+// Точки
+.slickDots
+  position: absolute !important
+  bottom: -60px !important
+  left: 50%
+  transform: translateX(-50%)
+  display: flex !important
+
+  li
+    margin-top: 90px
+    button
+      &:before
+        color: #999
+
+    &.slick-active button:before
+      color: #fff
+
+// Карточка
+.miniCard
+  width: 180px
+  height: 360px
+  background: #1a1a1a
+  border-radius: 8px
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4)
+  padding: 16px
+  box-sizing: border-box
+  display: flex
+  flex-direction: column
+  align-items: flex-start
+  justify-content: flex-start
+  transition: 0.2s
+  margin: 0 10px
+
+  // Фото
+  .miniImage
+    width: 100%
+    height: 250px
+    object-fit: cover
+    border-radius: 8px
+    margin-bottom: 12px
+
+  // Цена (крупнее, слева)
+  .miniPrice
+    font-size: 24px
+    font-weight: 700
+    margin-bottom: 6px
+    color: #fff
+
+  // Название (бренд/модель/год)
+  .miniName
+    font-size: 24px
+    color: #fff
+    margin-bottom: 8px

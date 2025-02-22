@@ -138,7 +138,10 @@
 }
 
 .slick-dots {
-  bottom: 15px !important;
+  position: absolute !important;
+  bottom: -40px !important;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .slick-dots li button:before {

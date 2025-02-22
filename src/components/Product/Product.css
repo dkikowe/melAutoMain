@@ -32,8 +32,8 @@
 }
 
 .product-image {
-    width: 100%;
-    height: 100%;
+    width: 400px;
+    height: 162.2px;
     object-fit: cover;
     border-radius: 12px 12px 0 0;
 }

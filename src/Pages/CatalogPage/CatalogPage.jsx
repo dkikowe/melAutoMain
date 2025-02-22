@@ -8,7 +8,7 @@ const CatalogPage = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:4040/get")
+    fetch("https://melautobackend-production.up.railway.app/get")
       .then((response) => response.json())
       .then((data) => setProducts(data["cars"]))
       .catch((error) => console.error("Ошибка загрузки данных:", error));
