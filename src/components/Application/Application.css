@@ -6,3 +6,10 @@
   border: 1px solid rgb(216, 216, 216);
   padding: 50px;
 }
+
+.applContainer input,
+.applContainer textarea,
+.applContainer select {
+  color: black !important;
+  font-weight: 900 !important;
+}

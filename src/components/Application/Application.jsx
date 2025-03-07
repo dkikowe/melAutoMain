@@ -1,5 +1,4 @@
 import "./Application.css";
-
 import React, { useState } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 
@@ -10,20 +9,36 @@ const Application = () => {
     email: "",
     city: "",
     carDetails: "",
-    consent: false
+    consent: false,
   });
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [name]: type === "checkbox" ? checked : value
+      [name]: type === "checkbox" ? checked : value,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+
+    const ownerPhone = "+48509156405"; // Замените на номер владельца
+    const text = `Здравствуйте, хочу сделать заявку на автомобиль
+    🚗 Заявка на автомобиль 🚗
+👤 ФИО: ${formData.fullName}
+📞 Телефон: ${formData.phone}
+📧 E-mail: ${formData.email || "Не указан"}
+🌍 Страна: ${formData.city || "Не выбрана"}
+🚘 Желаемый автомобиль: ${formData.carDetails || "Не указан"}
+✅ Согласие на обработку данных: ${formData.consent ? "Да" : "Нет"}`;
+
+    const whatsappUrl = `https://wa.me/${ownerPhone.replace(
+      /\D/g,
+      ""
+    )}?text=${encodeURIComponent(text)}`;
+
+    window.open(whatsappUrl, "_blank");
   };
 
   return (

@@ -70,13 +70,22 @@ const Catalog = () => {
               className={s.miniImage}
             />
 
-            {/* Название */}
-            <p className={s.miniName}>
-              {product.brand?.toUpperCase()} {product.model?.toUpperCase()}{" "}
-              {product.year}
-            </p>
-            {/* Цена */}
-            <p className={s.miniPrice}>{product.price?.toLocaleString()} $</p>
+            <div className={s.miniInfo}>
+              <p className={s.miniName}>
+                {product.brand?.toUpperCase()} {product.model?.toUpperCase()}{" "}
+                {product.year}
+              </p>
+              {/* Цена */}
+              <p className={s.miniPrice}>{product.price?.toLocaleString()} $</p>
+
+              {/* Название */}
+
+              {/* Дополнительная информация */}
+              <p className={s.miniDetails}>
+                Пробег {product.mileage?.toLocaleString() || "—"} км •{" "}
+                {product.fuelType || "—"} • Б/У
+              </p>
+            </div>
           </div>
         ))}
       </Slider>
