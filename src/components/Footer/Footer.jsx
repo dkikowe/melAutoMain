@@ -52,7 +52,7 @@ export default function Footer() {
               <FaWhatsapp />
             </a>
             <a
-              href="viber://chat?number=%2B375295240634"
+              href="viber://chat?number=+375295240634"
               className="social-icon ms-3"
             >
               <SiViber />

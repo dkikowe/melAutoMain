@@ -56,6 +56,11 @@
 
 .nav-item:hover {
   color: #ffffff;
+  cursor: pointer;
+}
+
+a:hover{
+  cursor: pointer;
 }
 
 /* Сендвич меню */

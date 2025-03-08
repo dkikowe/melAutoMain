@@ -9,6 +9,8 @@ import Services from "../../components/Servises/Services";
 import About from "../../components/AboutPage/About";
 import Feedback from "../../components/Feedback/Feedback";
 import Footer from "../../components/Footer/Footer";
+import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 
 export default function HomePage() {
   const images = [
@@ -28,6 +30,25 @@ export default function HomePage() {
     fade: false, // Отключил fade для нормального переключения
     arrows: false,
   };
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    const sectionId = searchParams.get("scrollTo");
+    if (sectionId) {
+      setTimeout(() => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          const offset = 115;
+          const elementPosition =
+            section.getBoundingClientRect().top + window.scrollY;
+          window.scrollTo({
+            top: elementPosition - offset,
+            behavior: "smooth",
+          });
+        }
+      }, 300); // Даем время на загрузку страницы
+    }
+  }, [searchParams]);
 
   const scrollToSection = () => {
     const formSection = document.getElementById("application");

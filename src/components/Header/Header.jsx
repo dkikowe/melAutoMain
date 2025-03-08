@@ -1,26 +1,38 @@
 import { useState } from "react";
+import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import "./Header.css";
-import { NavLink } from "react-router-dom";
 
 // Функция для прокрутки к секции
 const scrollToSection = (id) => {
-  const section = document.getElementById(id);
-  if (section) {
-    const offset = 125; // Отступ для хедера
-    const elementPosition =
-      section.getBoundingClientRect().top + window.scrollY;
-    window.scrollTo({
-      top: elementPosition - offset,
-      behavior: "smooth",
-    });
-  }
+  setTimeout(() => {
+    const section = document.getElementById(id);
+    if (section) {
+      const offset = 125; // Отступ для хедера
+      const elementPosition =
+        section.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: elementPosition - offset,
+        behavior: "smooth",
+      });
+    }
+  }, 300); // Небольшая задержка для корректного рендера
 };
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  const handleNavigation = (id) => {
+    if (location.pathname === "/home") {
+      scrollToSection(id);
+    } else {
+      navigate(`/home?scrollTo=${id}`);
+    }
+  };
 
   return (
     <header className="header bg-black text-white position-fixed top-0 start-0 w-100 shadow-sm d-flex align-items-center justify-content-between px-3">
@@ -37,34 +49,13 @@ export default function Header() {
 
       {/* Навигация */}
       <nav className={`nav-links ${isMenuOpen ? "active" : ""}`}>
-        <a
-          href="#about" // Когда нажимают, скроллится к секции с id="about"
-          onClick={(e) => {
-            e.preventDefault(); // Останавливаем стандартное поведение (переход по ссылке)
-            scrollToSection("about");
-          }}
-          className="nav-item"
-        >
+        <a onClick={() => handleNavigation("about")} className="nav-item">
           О НАС
         </a>
-        <a
-          href="#services"
-          onClick={(e) => {
-            e.preventDefault();
-            scrollToSection("services");
-          }}
-          className="nav-item"
-        >
+        <a onClick={() => handleNavigation("services")} className="nav-item">
           УСЛУГИ
         </a>
-        <a
-          href="#feedback"
-          onClick={(e) => {
-            e.preventDefault();
-            scrollToSection("feedback");
-          }}
-          className="nav-item"
-        >
+        <a onClick={() => handleNavigation("feedback")} className="nav-item">
           ОТЗЫВЫ
         </a>
         <NavLink to="/catalog" className="nav-item">
